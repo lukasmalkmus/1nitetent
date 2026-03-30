@@ -1,0 +1,38 @@
+[package]
+name = "one-nite-tent"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.94"
+license = "MIT"
+repository = "https://github.com/lukasmalkmus/1nitetent"
+description = "Agent-native CLI for querying 1nitetent.com campground spots"
+
+[[bin]]
+name = "1nt"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive", "env", "wrap_help"] }
+comfy-table = "7"
+geo = "0.32"
+geojson = "1"
+reqwest = { version = "0.13", features = ["blocking", "json", "query"] }
+reverse_geocoder = "4.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+zip = "2"
+
+[lints.clippy]
+pedantic = { level = "warn", priority = -1 }
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+todo = "deny"
+dbg_macro = "deny"
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1

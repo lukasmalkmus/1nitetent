@@ -1,0 +1,13 @@
+{
+  "name": "1nitetent",
+  "description": "Query free one-night camping spots from 1nitetent.com",
+  "version": "0.1.0",
+  "author": {
+    "name": "Lukas Malkmus",
+    "email": "mail@lukasmalkmus.com"
+  },
+  "homepage": "https://github.com/lukasmalkmus/1nitetent",
+  "repository": "https://github.com/lukasmalkmus/1nitetent",
+  "license": "MIT",
+  "keywords": ["camping", "1nitetent", "geojson", "geocoding"]
+}
