@@ -186,7 +186,7 @@ fn exit_code(err: &anyhow::Error) -> u8 {
     }
     // "not found" errors contain the phrase.
     let msg = format!("{err:#}");
-    if msg.contains("not found") {
+    if msg.contains("not found") || msg.contains("could not geocode") {
         return 3;
     }
     if msg.contains("cache") {
@@ -203,7 +203,7 @@ fn error_code(err: &anyhow::Error) -> &'static str {
         return "network_error";
     }
     let msg = format!("{err:#}");
-    if msg.contains("not found") {
+    if msg.contains("not found") || msg.contains("could not geocode") {
         return "not_found";
     }
     if msg.contains("cache") {

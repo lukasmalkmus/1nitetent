@@ -45,7 +45,7 @@ cargo clippy -- -D warnings
 cargo fmt -- --check
 ```
 
-**MSRV:** 1.85 (edition 2024)
+**MSRV:** 1.94 (edition 2024)
 
 ## Commit Format
 
