@@ -1,7 +1,7 @@
 {
   "name": "1nitetent",
   "description": "Query free one-night camping spots from 1nitetent.com",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": {
     "name": "Lukas Malkmus",
     "email": "mail@lukasmalkmus.com"
