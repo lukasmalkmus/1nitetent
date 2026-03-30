@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-03-30
+
+### Changed
+
+- Bumped `actions/checkout` from v4 to v6
+- Bumped `actions/upload-artifact` from v4 to v7
+- Bumped `actions/download-artifact` from v4 to v8
+- Removed private-repo `checks: write` permission workaround from CI
+  (repo is now public)
+
 ## [0.2.0] - 2026-03-30
 
 ### Fixed
@@ -43,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/lukasmalkmus/1nitetent/releases/tag/v0.1.0

@@ -15,7 +15,7 @@
       "name": "1nitetent",
       "source": "./",
       "description": "Query free one-night camping spots from 1nitetent.com",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "author": { "name": "Lukas Malkmus" },
       "homepage": "https://github.com/lukasmalkmus/1nitetent",
       "repository": "https://github.com/lukasmalkmus/1nitetent",
