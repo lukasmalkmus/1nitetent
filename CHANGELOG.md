@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-04-21
+
+### Added
+
+- Ship `bin/1nt` shim so the Claude Code plugin works without a separately
+  installed `1nt` binary. The shim prefers any user-installed `1nt` on
+  `PATH`; otherwise it reuses (or lazily downloads) a plugin-managed copy
+  from GitHub releases matching the plugin's declared version.
+- Add `SessionStart` hook (`hooks/ensure-binary.sh`) that keeps the
+  plugin-managed binary in sync in the background, never blocking session
+  startup.
+
+### Notes
+
+- The shim and hook prefer `jq` to parse `plugin.json` but fall back to a
+  pure-bash `sed` extractor when `jq` is not on `PATH`, so first-run works
+  on stock macOS, Alpine, and slim Linux containers.
+
 ## [0.3.0] - 2026-03-30
 
 ### Changed
@@ -53,7 +71,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/lukasmalkmus/1nitetent/releases/tag/v0.1.0

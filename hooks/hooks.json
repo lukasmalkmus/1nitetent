@@ -1,5 +1,5 @@
 {
-  "description": "Nudge agents to use the 1nitetent skill for 1nt commands",
+  "description": "Skill nudge + binary-sync hooks for the 1nitetent plugin",
   "hooks": {
     "PostToolUse": [
       {
@@ -8,6 +8,16 @@
           {
             "type": "command",
             "command": "${CLAUDE_PLUGIN_ROOT}/hooks/nudge-skill.sh"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/hooks/ensure-binary.sh"
           }
         ]
       }
