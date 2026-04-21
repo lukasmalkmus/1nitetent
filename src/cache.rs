@@ -15,8 +15,8 @@ const GEOJSON_URL: &str =
 const CITIES_URL: &str = "https://download.geonames.org/export/dump/cities1000.zip";
 const ADMIN1_URL: &str = "https://download.geonames.org/export/dump/admin1CodesASCII.txt";
 
-const GEOJSON_TTL: Duration = Duration::from_secs(86_400); // 1 day
-const GEONAMES_TTL: Duration = Duration::from_secs(30 * 86_400); // 30 days
+const GEOJSON_TTL: Duration = Duration::from_hours(24);
+const GEONAMES_TTL: Duration = Duration::from_hours(720); // 30 days
 
 pub struct Cache {
     dir: PathBuf,

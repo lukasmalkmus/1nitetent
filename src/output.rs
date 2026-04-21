@@ -194,7 +194,7 @@ pub fn format_detail<T: DetailView + Serialize>(
             table.set_content_arrangement(ContentArrangement::Dynamic);
             table.set_header(["Field", "Value"]);
             for (name, value) in &fields {
-                if filter.is_none() || filter.is_some_and(|f| f.has_field(&name.to_lowercase())) {
+                if filter.is_none_or(|f| f.has_field(&name.to_lowercase())) {
                     table.add_row([*name, value.as_str()]);
                 }
             }

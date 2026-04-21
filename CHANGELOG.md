@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.1] - 2026-04-21
+
+### Fixed
+
+- Switch cache TTL constants to `Duration::from_hours` and the filter
+  check in `output.rs` to `Option::is_none_or`, clearing two new clippy
+  lints introduced in Rust 1.95 (`duration_suboptimal_units`,
+  `manual_is_variant_and`).
+- Refresh transitive `rustls-webpki` to 0.103.12 to clear
+  RUSTSEC-2026-0098 and RUSTSEC-2026-0099 (name-constraint handling).
+
 ## [0.4.0] - 2026-04-21
 
 ### Added
@@ -71,7 +82,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.1...HEAD
+[0.4.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.1.0...v0.2.0
