@@ -15,7 +15,7 @@ path = "src/main.rs"
 anyhow = "1"
 clap = { version = "4", features = ["derive", "env", "wrap_help"] }
 comfy-table = "7"
-geo = "0.32"
+geo = "0.33"
 geojson = "1"
 reqwest = { version = "0.13", features = ["blocking", "json", "query"] }
 reverse_geocoder = "4.1"
