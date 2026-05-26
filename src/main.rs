@@ -6,6 +6,7 @@ use clap::{Args, Parser, Subcommand};
 mod cache;
 mod commands;
 mod geocode;
+mod mcp;
 mod output;
 mod spot;
 
@@ -92,6 +93,9 @@ enum Command {
     /// Force re-download and re-enrich all data.
     Refresh,
 
+    /// Run the MCP server over stdio.
+    Mcp,
+
     /// Print version and cache status.
     Version,
 }
@@ -107,11 +111,12 @@ struct OutputArgs {
     fields: Option<String>,
 }
 
-fn main() -> ExitCode {
+#[tokio::main(flavor = "current_thread")]
+async fn main() -> ExitCode {
     let cli = Cli::parse();
     let json_errors = cli.json_errors || !std::io::stderr().is_terminal();
 
-    if let Err(err) = run(cli) {
+    if let Err(err) = run(cli).await {
         let code = exit_code(&err);
         if json_errors {
             output::print_json_error(&err, error_code(&err));
@@ -124,7 +129,7 @@ fn main() -> ExitCode {
     ExitCode::SUCCESS
 }
 
-fn run(cli: Cli) -> anyhow::Result<()> {
+async fn run(cli: Cli) -> anyhow::Result<()> {
     match cli.command {
         Command::Near {
             location,
@@ -169,6 +174,8 @@ fn run(cli: Cli) -> anyhow::Result<()> {
         }),
 
         Command::Refresh => commands::refresh::run(),
+
+        Command::Mcp => mcp::run().await,
 
         Command::Version => {
             commands::version::run();

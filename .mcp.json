@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "1nitetent": {
+      "command": "1nt",
+      "args": ["mcp"]
+    }
+  }
+}

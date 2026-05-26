@@ -1,0 +1,21 @@
+{
+  "name": "1nitetent",
+  "interface": {
+    "displayName": "1nitetent"
+  },
+  "plugins": [
+    {
+      "name": "1nitetent",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/lukasmalkmus/1nitetent.git",
+        "ref": "main"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

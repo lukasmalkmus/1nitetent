@@ -1,6 +1,6 @@
 # 1nt
 
-Agent-native CLI for querying free one-night camping spots from
+Agent-native CLI and MCP server for querying free one-night camping spots from
 [1nitetent.com](https://1nitetent.com).
 
 **Repository:** `~/Code/Private/1nitetent`
@@ -15,6 +15,7 @@ Agent-native CLI for querying free one-night camping spots from
 1nt spot <id>
 1nt list [--limit 30]
 1nt refresh
+1nt mcp
 1nt version
 ```
 

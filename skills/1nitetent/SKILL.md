@@ -3,7 +3,8 @@ name: 1nitetent
 description: |
   Query 1nitetent.com campground spots (free one-night tent camping). Use when
   asked about 1nitetent, campgrounds, camping spots, tent spots, or "where can
-  I camp near X". Supports near, search, spot, list, refresh subcommands.
+  I camp near X". Supports near, search, spot, list, refresh, and mcp
+  subcommands.
 user-invocable: true
 argument-hint: <search-query>
 allowed-tools: Bash(1nt *)
@@ -12,6 +13,7 @@ allowed-tools: Bash(1nt *)
 # 1nitetent Campground Query
 
 Query 2,480+ free one-night camping spots from 1nitetent.com via the `1nt` CLI.
+Tool-calling hosts can use the bundled MCP server via `1nt mcp`.
 
 Process: `$ARGUMENTS`
 
@@ -25,7 +27,8 @@ User wants campground info
   │     └── Near a location? ────── 1nt search <term> --near <place>
   ├── Specific spot detail? ─────── 1nt spot <id>
   ├── Browse all spots? ─────────── 1nt list [--limit N]
-  └── Refresh data? ─────────────── 1nt refresh
+  ├── Refresh data? ─────────────── 1nt refresh
+  └── MCP host setup? ───────────── 1nt mcp
 ```
 
 ## Compound Queries
@@ -79,3 +82,18 @@ The enriched GeoJSON has all original properties plus `location` (e.g.,
 | 3 | Not found |
 | 4 | Network error |
 | 5 | Cache error |
+
+## MCP Server
+
+Start the stdio MCP server for tool-calling agents:
+
+```json
+{
+  "mcpServers": {
+    "1nitetent": {
+      "command": "1nt",
+      "args": ["mcp"]
+    }
+  }
+}
+```

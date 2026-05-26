@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-05-26
+
+### Added
+
+- Add `1nt mcp`, a stdio MCP server exposing `near`, `search`, `spot`,
+  `list`, `status`, and `refresh` tools.
+- Add Codex plugin metadata and marketplace packaging alongside the existing
+  Claude Code plugin.
+
+### Changed
+
+- Make the plugin shim and binary-sync hook work with Codex plugin
+  environment variables as well as Claude Code's variables.
+
 ## [0.4.1] - 2026-04-21
 
 ### Fixed
@@ -82,7 +96,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.1...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.2.0...v0.3.0
