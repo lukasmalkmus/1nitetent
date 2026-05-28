@@ -1,6 +1,6 @@
 {
   "name": "1nitetent",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Query free one-night camping spots from 1nitetent.com via CLI and MCP",
   "author": {
     "name": "Lukas Malkmus",
