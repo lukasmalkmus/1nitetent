@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.3] - 2026-06-17
+
+### Fixed
+
+- Resolve the bundled MCP server via `${CLAUDE_PLUGIN_ROOT}/bin/1nt` instead of a
+  bare `1nt` command. Plugin hosts spawn the stdio MCP server without the plugin's
+  `bin/` on `PATH`, so the bare name failed with "Executable not found in $PATH".
+
+### Changed
+
+- Refresh transitive dependencies via `cargo update` (drops the duplicate
+  `thiserror` 1.x and the stale `windows-sys` 0.45 backend).
+
 ## [0.5.2] - 2026-05-28
 
 ### Changed

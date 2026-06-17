@@ -1,7 +1,7 @@
 {
   "mcpServers": {
     "1nitetent": {
-      "command": "1nt",
+      "command": "${CLAUDE_PLUGIN_ROOT}/bin/1nt",
       "args": ["mcp"]
     }
   }
