@@ -5,7 +5,7 @@ use rmcp::ServerHandler;
 use rmcp::ServiceExt;
 use rmcp::handler::server::router::tool::ToolRouter;
 use rmcp::handler::server::wrapper::Parameters;
-use rmcp::model::{Implementation, ProtocolVersion, ServerCapabilities, ServerInfo};
+use rmcp::model::{Implementation, ServerCapabilities, ServerInfo};
 use rmcp::transport::stdio;
 use rmcp::{tool, tool_handler, tool_router};
 use schemars::JsonSchema;
@@ -150,16 +150,12 @@ impl Server {
 #[tool_handler(router = self.tool_router)]
 impl ServerHandler for Server {
     fn get_info(&self) -> ServerInfo {
-        let mut info = ServerInfo::default();
-        info.protocol_version = ProtocolVersion::V_2025_06_18;
-        info.capabilities = ServerCapabilities::builder().enable_tools().build();
-        info.server_info = Implementation::from_build_env();
-        "1nitetent".clone_into(&mut info.server_info.name);
-        env!("CARGO_PKG_VERSION").clone_into(&mut info.server_info.version);
-        info.instructions = Some(
-            "Query free one-night camping spots from 1nitetent.com. Use `near` for location-based questions and `search` for text queries.".to_owned(),
-        );
-        info
+        ServerInfo::new(ServerCapabilities::builder().enable_tools().build())
+            .with_server_info(Implementation::new("1nitetent", env!("CARGO_PKG_VERSION")))
+            .with_instructions(
+                "Query free one-night camping spots from 1nitetent.com. Use `near` for \
+                 location-based questions and `search` for text queries.",
+            )
     }
 }
 
