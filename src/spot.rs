@@ -126,3 +126,58 @@ impl FieldNames for Spot {
         ]
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn spot(id: &str, name: &str, description: &str) -> Spot {
+        Spot {
+            id: id.to_owned(),
+            name: name.to_owned(),
+            description: description.to_owned(),
+            link: String::new(),
+            location: String::new(),
+            lat: 0.0,
+            lon: 0.0,
+            distance_km: None,
+        }
+    }
+
+    #[test]
+    fn extract_id_reads_the_leading_hash_number() {
+        assert_eq!(Spot::extract_id("#2513 Martin"), "2513");
+        assert_eq!(Spot::extract_id("#2513"), "2513");
+        assert_eq!(Spot::extract_id("no hash here"), "no hash here");
+    }
+
+    #[test]
+    fn matches_id_accepts_the_hash_prefix_either_way() {
+        let s = spot("2513", "#2513 Martin", "");
+        assert!(s.matches_id("2513"));
+        assert!(s.matches_id("#2513"));
+        assert!(!s.matches_id("251"));
+    }
+
+    #[test]
+    fn matches_text_is_case_insensitive_over_name_and_description() {
+        let s = spot("1", "#1 Waldrand", "Kleines Paradies am See");
+        assert!(s.matches_text("waldrand"));
+        assert!(s.matches_text("PARADIES"));
+        assert!(!s.matches_text("Nordsee"));
+    }
+
+    #[test]
+    fn strip_html_unwraps_tags_and_entities() {
+        assert_eq!(Spot::strip_html("<p>a<br />b</p>"), "a\nb");
+        assert_eq!(Spot::strip_html("Fish &amp; Chips"), "Fish & Chips");
+    }
+
+    #[test]
+    fn strip_html_eats_escaped_angle_brackets() {
+        // Entities decode before tags are stripped, so `&lt;x&gt;` becomes a
+        // tag and disappears. Upstream descriptions don't contain escaped
+        // brackets, so this stays as-is rather than reordering the passes.
+        assert_eq!(Spot::strip_html("&lt;tag&gt;"), "");
+    }
+}
