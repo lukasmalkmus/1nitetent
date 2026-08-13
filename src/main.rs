@@ -111,12 +111,11 @@ struct OutputArgs {
     fields: Option<String>,
 }
 
-#[tokio::main(flavor = "current_thread")]
-async fn main() -> ExitCode {
+fn main() -> ExitCode {
     let cli = Cli::parse();
     let json_errors = cli.json_errors || !std::io::stderr().is_terminal();
 
-    if let Err(err) = run(cli).await {
+    if let Err(err) = run(cli) {
         let code = exit_code(&err);
         if json_errors {
             output::print_json_error(&err, error_code(&err));
@@ -129,7 +128,7 @@ async fn main() -> ExitCode {
     ExitCode::SUCCESS
 }
 
-async fn run(cli: Cli) -> anyhow::Result<()> {
+fn run(cli: Cli) -> anyhow::Result<()> {
     match cli.command {
         Command::Near {
             location,
@@ -175,7 +174,13 @@ async fn run(cli: Cli) -> anyhow::Result<()> {
 
         Command::Refresh => commands::refresh::run(),
 
-        Command::Mcp => mcp::run().await,
+        // Only the MCP server needs an async runtime. Keeping it out of the
+        // other arms keeps `reqwest::blocking` off an async context, where
+        // dropping its internal runtime panics.
+        Command::Mcp => tokio::runtime::Builder::new_current_thread()
+            .enable_all()
+            .build()?
+            .block_on(mcp::run()),
 
         Command::Version => {
             commands::version::run();

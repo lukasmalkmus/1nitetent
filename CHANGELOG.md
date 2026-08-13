@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Truncated table cells now end with `…` instead of `...` (comfy-table 8).
+
+### Fixed
+
+- `1nt refresh`, and any command that had to populate a cold cache, aborted
+  instead of fetching. The MCP server aborted on the same paths, taking the
+  whole session down.
+
 ## [0.5.3] - 2026-06-17
 
 ### Fixed

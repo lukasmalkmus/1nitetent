@@ -14,7 +14,7 @@ path = "src/main.rs"
 [dependencies]
 anyhow = "1"
 clap = { version = "4", features = ["derive", "env", "wrap_help"] }
-comfy-table = "7"
+comfy-table = "8"
 geo = "0.33"
 geojson = "1"
 reqwest = { version = "0.13", features = ["blocking", "json", "query"] }
@@ -24,7 +24,7 @@ schemars = "1"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 thiserror = "2"
-tokio = { version = "1", features = ["rt", "macros"] }
+tokio = { version = "1", features = ["rt"] }
 zip = "8"
 
 [lints.clippy]

@@ -79,7 +79,7 @@ impl Server {
         &self,
         Parameters(args): Parameters<NearArgs>,
     ) -> Result<String, rmcp::ErrorData> {
-        let spots = query_near(&args).map_err(to_mcp_err)?;
+        let spots = blocking(move || query_near(&args)).await?;
         serialize_envelope(&spots)
     }
 
@@ -91,7 +91,7 @@ impl Server {
         &self,
         Parameters(args): Parameters<SearchArgs>,
     ) -> Result<String, rmcp::ErrorData> {
-        let spots = query_search(&args).map_err(to_mcp_err)?;
+        let spots = blocking(move || query_search(&args)).await?;
         serialize_envelope(&spots)
     }
 
@@ -103,7 +103,7 @@ impl Server {
         &self,
         Parameters(args): Parameters<SpotArgs>,
     ) -> Result<String, rmcp::ErrorData> {
-        let spot = query_spot(&args.id).map_err(to_mcp_err)?;
+        let spot = blocking(move || query_spot(&args.id)).await?;
         serde_json::to_string(&spot).map_err(to_mcp_err)
     }
 
@@ -115,7 +115,7 @@ impl Server {
         &self,
         Parameters(args): Parameters<ListArgs>,
     ) -> Result<String, rmcp::ErrorData> {
-        let spots = query_list(args.limit).map_err(to_mcp_err)?;
+        let spots = blocking(move || query_list(args.limit)).await?;
         serialize_envelope(&spots)
     }
 
@@ -137,8 +137,7 @@ impl Server {
 
     #[tool(description = "Refresh cached 1nitetent and GeoNames data.")]
     async fn refresh(&self) -> Result<String, rmcp::ErrorData> {
-        let cache = Cache::new();
-        let path = cache.refresh().map_err(to_mcp_err)?;
+        let path = blocking(|| Cache::new().refresh()).await?;
         serde_json::to_string(&serde_json::json!({
             "ok": true,
             "cache_path": path,
@@ -266,6 +265,20 @@ fn default_limit() -> usize {
 
 fn to_mcp_err<E: std::fmt::Display>(err: E) -> rmcp::ErrorData {
     rmcp::ErrorData::internal_error(err.to_string(), None)
+}
+
+/// Run cache work on a blocking thread. The cache fetches over
+/// `reqwest::blocking`, which builds its own runtime, and dropping that
+/// inside an async context aborts the server.
+async fn blocking<T, F>(f: F) -> Result<T, rmcp::ErrorData>
+where
+    F: FnOnce() -> anyhow::Result<T> + Send + 'static,
+    T: Send + 'static,
+{
+    tokio::task::spawn_blocking(f)
+        .await
+        .map_err(to_mcp_err)?
+        .map_err(to_mcp_err)
 }
 
 pub async fn run() -> anyhow::Result<()> {
