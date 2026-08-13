@@ -17,9 +17,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- `1nt refresh`, and any command that had to populate a cold cache, aborted
-  instead of fetching. The MCP server aborted on the same paths, taking the
-  whole session down.
+- Removed a latent abort on `1nt refresh` and any command that had to populate
+  a cold cache. The cache fetches over a blocking HTTP client that owns a
+  runtime, and `main` dropped it inside an async context. Release builds, which
+  is what the published binaries are, happened to survive this. Debug builds hit
+  it every time, on the CLI and on the MCP server.
 
 ## [0.5.3] - 2026-06-17
 
