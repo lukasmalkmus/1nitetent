@@ -7,8 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-08-13
+
 ### Changed
 
+- The MCP server speaks protocol 2026-07-28. Older clients still negotiate
+  2025-06-18.
 - Truncated table cells now end with `…` instead of `...` (comfy-table 8).
 
 ### Fixed
@@ -134,7 +138,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.2...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.3...v0.6.0
+[0.5.3]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.1...v0.5.2
 [0.5.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.0...v0.5.1
 [0.5.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.4.1...v0.5.0
