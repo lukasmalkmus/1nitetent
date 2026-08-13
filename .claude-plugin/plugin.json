@@ -1,5 +1,7 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "1nitetent",
+  "displayName": "1nitetent Campground CLI",
   "description": "Query free one-night camping spots from 1nitetent.com via CLI and MCP",
   "version": "0.5.3",
   "author": {
@@ -9,6 +11,12 @@
   "homepage": "https://github.com/lukasmalkmus/1nitetent",
   "repository": "https://github.com/lukasmalkmus/1nitetent",
   "license": "MIT",
-  "keywords": ["camping", "1nitetent", "geojson", "geocoding", "mcp"],
+  "keywords": [
+    "camping",
+    "1nitetent",
+    "geojson",
+    "geocoding",
+    "mcp"
+  ],
   "mcpServers": "./.mcp.json"
 }

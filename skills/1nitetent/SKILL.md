@@ -1,10 +1,11 @@
 ---
 name: 1nitetent
 description: |
-  Query 1nitetent.com campground spots (free one-night tent camping). Use when
-  asked about 1nitetent, campgrounds, camping spots, tent spots, or "where can
-  I camp near X". Supports near, search, spot, list, refresh, and mcp
-  subcommands.
+  Query 1nitetent.com campground spots (free one-night tent camping). Supports
+  the near, search, spot, list, refresh, and mcp subcommands.
+when_to_use: |
+  Use when asked about 1nitetent, campgrounds, camping spots, tent spots, or
+  "where can I camp near X".
 user-invocable: true
 argument-hint: <search-query>
 allowed-tools: Bash(1nt *)
