@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.1] - 2026-08-24
+
+### Changed
+
+- Refresh dependencies via `cargo update`, including `rmcp` 3.1.4. This moves
+  `h2` to 0.4.18, which closes RUSTSEC-2026-0258, an unbounded queue of empty
+  HTTP/2 DATA frames.
+
 ## [0.6.0] - 2026-08-13
 
 ### Changed
@@ -140,7 +148,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.1...HEAD
+[0.6.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.2...v0.5.3
 [0.5.2]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.1...v0.5.2
