@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-10-07
+
+### Fixed
+
+- Drop the literal `<system-reminder>` tag from the skill nudge hook text.
+  Claude Code already wraps hook context in that tag and, since 2.1.292,
+  escapes a tag that a hook writes, so Claude saw an escaped tag instead of a
+  plain hint.
+- Quote the plugin root in the hook commands. The hooks failed with exit 127
+  when the plugin directory path contained a space.
+
+### Changed
+
+- Bump direct dependencies: `clap` 4.6.7, `comfy-table` 8.0.1, `reqwest`
+  0.13.5, `rmcp` 3.5.1, `thiserror` 2.0.21, `tokio` 1.53.2. Refresh
+  transitive dependencies via `cargo update`. This moves `rustls` to 0.23.45,
+  which closes RUSTSEC-2026-0285, TLS 1.3 handshake messages accepted across
+  encryption level boundaries.
+- The MCP server answers an `initialize` request for protocol 2026-07-28 with
+  2025-11-25, the newest revision that still has an `initialize` handshake
+  (rmcp 3.5). Clients on 2026-07-28 use `server/discover` and per-request
+  metadata, which work as before.
+
 ## [0.6.1] - 2026-08-24
 
 ### Changed
@@ -148,7 +171,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.1...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.2...HEAD
+[0.6.2]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.3...v0.6.0
 [0.5.3]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.2...v0.5.3
