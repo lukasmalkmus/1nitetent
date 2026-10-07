@@ -8,7 +8,7 @@ session_id=$(echo "$input" | jq -r '.session_id // empty' 2>/dev/null)
 marker="${TMPDIR:-/tmp}/.1nt-skill-nudge-${session_id:-$PPID}"
 [ -f "$marker" ] && exit 0
 touch "$marker"
-nudge='<system-reminder>The "1nitetent" skill provides guided 1nt workflows. Invoke it with /1nitetent or the Skill tool.</system-reminder>'
+nudge='The "1nitetent" skill provides guided 1nt workflows. Invoke it with /1nitetent or the Skill tool.'
 jq -n --arg nudge "$nudge" '{
   hookSpecificOutput: {
     hookEventName: "PostToolUse",
