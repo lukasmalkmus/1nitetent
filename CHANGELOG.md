@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.3] - 2026-10-19
+
+### Changed
+
+- The x86_64 Linux binary needs glibc 2.18 or later, down from 2.39 in 0.6.2.
+- Bump direct dependencies: `schemars` 1.2.3, `serde_json` 1.0.154, `tokio`
+  1.53.3, `zip` 9.0.5. Refresh transitive dependencies via `cargo update`.
+
+### Security
+
+- `zip` 9 closes RUSTSEC-2026-0367 to RUSTSEC-2026-0369. These advisories
+  affect `ZipArchive::extract` and `ZipStreamReader::extract`, which `1nt`
+  does not call.
+- `rustls` 0.23.46 closes RUSTSEC-2026-0346 to RUSTSEC-2026-0349.
+  RUSTSEC-2026-0349 covers an unauthenticated ServerHello that downgrades
+  later connections to classical key exchange.
+
 ## [0.6.2] - 2026-10-07
 
 ### Fixed
@@ -171,7 +188,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.2...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.3...HEAD
+[0.6.3]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.2...v0.6.3
 [0.6.2]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.0...v0.6.1
 [0.6.0]: https://github.com/lukasmalkmus/1nitetent/compare/v0.5.3...v0.6.0
