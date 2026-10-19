@@ -169,7 +169,7 @@ impl Cache {
         let mut cities_tsv = String::new();
         for i in 0..archive.len() {
             let mut file = archive.by_index(i)?;
-            if file.name().contains("cities1000.txt") {
+            if file.name()?.contains("cities1000.txt") {
                 file.read_to_string(&mut cities_tsv)?;
                 break;
             }
