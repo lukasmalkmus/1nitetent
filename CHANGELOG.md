@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Start the bundled MCP launcher in Codex without relying on Claude-specific executable-path expansion.
 - Keep the portable MCP cache in the plugin's persistent data directory.
+- Remove temporary download files before starting the CLI.
 
 ## [0.6.3] - 2026-10-19
 
