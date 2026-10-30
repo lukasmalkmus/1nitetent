@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.4] - 2026-10-30
+
+### Added
+
+- Add portable Agent Plugins 1.0 packaging and an Agent Skills workflow while retaining Claude Code integration.
+
+### Fixed
+
+- Start the bundled MCP launcher in Codex without relying on Claude-specific executable-path expansion.
+- Keep the portable MCP cache in the plugin's persistent data directory.
+- Remove temporary download files before starting the CLI.
+
+### Security
+
+- Update `rustls-webpki` to 0.103.16 and `webpki-root-certs` to 1.0.10 to reject distrusted certificate intermediates (RUSTSEC-2026-0382 and RUSTSEC-2026-0383).
+- Update `ctutils` to 0.4.4 to fix non-constant-time operations (RUSTSEC-2026-0385).
+
 ## [0.6.3] - 2026-10-19
 
 ### Changed
@@ -188,7 +205,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Skill with decision tree and compound query documentation
 - PostToolUse nudge hook for skill discovery
 
-[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.3...HEAD
+[Unreleased]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.4...HEAD
+[0.6.4]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.3...v0.6.4
 [0.6.3]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.2...v0.6.3
 [0.6.2]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/lukasmalkmus/1nitetent/compare/v0.6.0...v0.6.1

@@ -5,20 +5,34 @@ on:
     branches: [main]
     paths:
       - ".claude-plugin/**"
-      - ".codex-plugin/**"
       - ".agents/**"
+      - "bin/**"
+      - "com.openai/**"
       - "skills/**"
       - "hooks/**"
+      - "scripts/**"
+      - "plugin.json"
+      - "mcp.json"
       - ".mcp.json"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "CHANGELOG.md"
       - ".github/workflows/plugin.yaml"
   pull_request:
     paths:
       - ".claude-plugin/**"
-      - ".codex-plugin/**"
       - ".agents/**"
+      - "bin/**"
+      - "com.openai/**"
       - "skills/**"
       - "hooks/**"
+      - "scripts/**"
+      - "plugin.json"
+      - "mcp.json"
       - ".mcp.json"
+      - "Cargo.toml"
+      - "Cargo.lock"
+      - "CHANGELOG.md"
       - ".github/workflows/plugin.yaml"
 
 concurrency:
@@ -34,9 +48,11 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 22
-      - run: npm install -g @anthropic-ai/claude-code
+      - run: npm install -g @anthropic-ai/claude-code@2.1.308
       - run: claude plugin validate . --strict
       - run: claude plugin validate .claude-plugin/plugin.json --strict
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run --python 3.13 --script scripts/validate_plugin.py
 
   versions:
     name: Versions
@@ -46,7 +62,7 @@ jobs:
       - name: Manifest versions match the crate
         run: |
           crate=$(grep -m1 '^version' Cargo.toml | sed 's/.*"\(.*\)"/\1/')
-          for f in .claude-plugin/plugin.json .codex-plugin/plugin.json; do
+          for f in plugin.json .claude-plugin/plugin.json; do
             got=$(jq -r '.version' "$f")
             [ "$got" = "$crate" ] || { echo "::error file=$f::version $got != crate $crate"; exit 1; }
           done
@@ -56,3 +72,19 @@ jobs:
             exit 1
           }
           echo "all manifests at $crate"
+
+  runtime:
+    name: Runtime (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    env:
+      CARGO_TARGET_DIR: target
+      PLUGIN_TEST_BINARY: target/debug/1nt
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --locked
+      - run: python3 scripts/test_plugin.py -v
