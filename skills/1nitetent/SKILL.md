@@ -3,11 +3,9 @@ name: 1nitetent
 description: |
   Query 1nitetent.com campground spots (free one-night tent camping). Supports
   the near, search, spot, list, refresh, and mcp subcommands.
-when_to_use: |
   Use when asked about 1nitetent, campgrounds, camping spots, tent spots, or
   "where can I camp near X".
-user-invocable: true
-argument-hint: <search-query>
+compatibility: Requires the 1nt CLI and network access for data refreshes. The bundled Bash launcher supports macOS and Linux.
 allowed-tools: Bash(1nt *)
 ---
 
@@ -16,7 +14,7 @@ allowed-tools: Bash(1nt *)
 Query 2,480+ free one-night camping spots from 1nitetent.com via the `1nt` CLI.
 Tool-calling hosts can use the bundled MCP server via `1nt mcp`.
 
-Process: `$ARGUMENTS`
+Use the user's request to choose the query and filters.
 
 ## Decision Tree
 
@@ -67,11 +65,14 @@ Use `-F name,location,link` to filter output fields.
 For questions the subcommands don't cover, use `jq` on the enriched cache:
 
 ```bash
-jq '<filter>' ~/.cache/1nt/campgrounds.enriched.geojson
+jq '<filter>' "${XDG_CACHE_HOME:-$HOME/.cache}/1nt/campgrounds.enriched.geojson"
 ```
 
 The enriched GeoJSON has all original properties plus `location` (e.g.,
 "Beverungen, Lower Saxony, DE").
+
+The portable MCP plugin sets `XDG_CACHE_HOME` under its persistent plugin data
+directory. Query tools use that cache rather than the standalone CLI's default.
 
 ## Exit Codes
 

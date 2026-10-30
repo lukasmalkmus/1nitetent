@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
-# SessionStart hook: keep ${CLAUDE_PLUGIN_DATA}/bin/1nt in sync with the
-# plugin version declared in .claude-plugin/plugin.json. Runs once per
-# Claude Code session and fires-and-forgets so we never block session
+# SessionStart hook: keep ${PLUGIN_DATA}/bin/1nt in sync with the
+# version declared in plugin.json. Runs once per
+# session and fires-and-forgets so we never block session
 # startup on a flaky network.
 #
 # Any download actually happens via bin/1nt's own lazy path, so the worst
@@ -11,9 +11,14 @@
 
 set -euo pipefail
 
+export PATH="${PATH:+$PATH:}/usr/bin:/bin:/usr/sbin:/sbin"
+
 plugin_root="${PLUGIN_ROOT:-${CLAUDE_PLUGIN_ROOT:-}}"
 data_dir="${PLUGIN_DATA:-${CLAUDE_PLUGIN_DATA:-$HOME/.claude/plugins/data/1nitetent}}"
-plugin_json="$plugin_root/.codex-plugin/plugin.json"
+plugin_json="$plugin_root/plugin.json"
+if [[ ! -f "$plugin_json" ]]; then
+  plugin_json="$plugin_root/.codex-plugin/plugin.json"
+fi
 if [[ ! -f "$plugin_json" ]]; then
   plugin_json="$plugin_root/.claude-plugin/plugin.json"
 fi
