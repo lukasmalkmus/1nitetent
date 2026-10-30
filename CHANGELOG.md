@@ -19,6 +19,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Keep the portable MCP cache in the plugin's persistent data directory.
 - Remove temporary download files before starting the CLI.
 
+### Security
+
+- Update `rustls-webpki` to 0.103.16 and `webpki-root-certs` to 1.0.10 to reject distrusted certificate intermediates (RUSTSEC-2026-0382 and RUSTSEC-2026-0383).
+- Update `ctutils` to 0.4.4 to fix non-constant-time operations (RUSTSEC-2026-0385).
+
 ## [0.6.3] - 2026-10-19
 
 ### Changed
