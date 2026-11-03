@@ -13,6 +13,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Write `1nt spot --output ndjson` on one line.
 - Validate `-F` before the cache load and geocoding, so a typo cannot trigger a download.
 
+### Changed
+
+- Bump direct dependencies: `rmcp` 3.8.0, `zip` 9.3.0. Refresh transitive dependencies via `cargo update`.
+
 ## [0.6.4] - 2026-10-30
 
 ### Added
