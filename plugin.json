@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "1nitetent",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "Query free one-night camping spots from 1nitetent.com via CLI and MCP",
   "author": {
     "name": "Lukas Malkmus",
