@@ -23,7 +23,7 @@ Agent-native CLI and MCP server for querying free one-night camping spots from
 
 - **Table** (default in TTY), **JSON** (default when piped), **NDJSON**
 - JSON envelope: `{"results": [...], "total_count": N, "showing": N, "has_more": bool}`
-- Field filtering: `-F name,location,link`
+- Field filtering: `-F name,location,link`. Every accepted name appears in every format. A missing `description` or `distance_km` is `null` with `-F`, absent without it.
 - Structured errors: `{"error": "...", "code": "..."}` on stderr
 
 ## Exit Codes

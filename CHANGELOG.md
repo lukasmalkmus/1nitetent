@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Fix `-F` dropping fields. With `-F`, every accepted name appears in every output format, and a missing `description` or `distance_km` is `null`. Tables label columns with the requested names, in the requested order, with raw values.
+- Write `1nt spot --output ndjson` on one line.
+- Validate `-F` before the cache load and geocoding, so a typo cannot trigger a download.
+
 ## [0.6.4] - 2026-10-30
 
 ### Added

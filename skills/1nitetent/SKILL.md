@@ -44,7 +44,7 @@ User wants campground info
 Output defaults to **table** in terminal, **JSON** when piped (agent use).
 Override with `--output json|ndjson|table`.
 
-Use `-F name,location,link` to filter output fields.
+Use `-F name,location,link` to filter output fields. Every accepted name appears in every format. A missing `description` or `distance_km` is `null` with `-F`, absent without it.
 
 ## JSON Envelope
 
