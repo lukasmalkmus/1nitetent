@@ -11,6 +11,12 @@ pub struct SpotArgs {
 }
 
 pub fn run(args: &SpotArgs) -> anyhow::Result<()> {
+    let filter = args
+        .fields
+        .as_deref()
+        .map(FieldFilter::parse::<Spot>)
+        .transpose()?;
+
     let cache = Cache::new();
     cache.ensure_cache()?;
     let spots = cache.load_spots()?;
@@ -22,10 +28,5 @@ pub fn run(args: &SpotArgs) -> anyhow::Result<()> {
     };
 
     let format = OutputFormat::resolve(args.output);
-    let filter = args
-        .fields
-        .as_deref()
-        .map(FieldFilter::parse::<Spot>)
-        .transpose()?;
     output::format_detail(&spot, format, filter.as_ref())
 }

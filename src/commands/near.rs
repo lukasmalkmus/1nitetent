@@ -15,6 +15,12 @@ pub struct NearArgs {
 }
 
 pub fn run(args: &NearArgs) -> anyhow::Result<()> {
+    let filter = args
+        .fields
+        .as_deref()
+        .map(FieldFilter::parse::<Spot>)
+        .transpose()?;
+
     let cache = Cache::new();
     cache.ensure_cache()?;
     let mut spots = cache.load_spots()?;
@@ -42,10 +48,5 @@ pub fn run(args: &NearArgs) -> anyhow::Result<()> {
     let limited: Vec<Spot> = spots.into_iter().take(args.limit).collect();
 
     let format = OutputFormat::resolve(args.output);
-    let filter = args
-        .fields
-        .as_deref()
-        .map(FieldFilter::parse::<Spot>)
-        .transpose()?;
     output::format_list(&limited, total_count, format, filter.as_ref())
 }
